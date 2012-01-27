@@ -1,0 +1,37 @@
+This is a basic example of inter-process communication
+using fork() and pipe() in C++
+
+Includes an example of creating a C++ stream from a file descriptor
+and how to read/write from/to it using << and >> operators
+
+Needs GCC's libstdc++ and a POSIX environment
+
+Resources:
+     YoLinux Tutorial: Fork, Exec and Process control
+     Beginning Linux programming, Matthew & Stones, Wrox Press
+     The GNU C Library manual
+     The GNU C++ Library manual
+     fileno(3) on C++ Streams: A Hacker's Lament, Richard B. Kreckel
+
+
+Please send me any improvement/recommendation/comment through email
+
+Author: Diego Barrios Romero
+Email: eldruin@eldruin.com
+Public domain Copyleft 2011
+
+
+
+The scenario is: A parent process wants to handle another program’s
+input and output streams, a process-level wrapper.
+
+So the example is: A parent process forks into another child
+process. The parent sends the child a message, the child receives it
+and outputs it to the parent to show the communication works just
+fine.
+
+The forked process calls the program we want to control. Which in this
+case is the easiest C++ program ever: Just reads a line from the
+standard input and outputs a message containing the line just read
+through the standard output. In addition, another message is sent
+through the standard error stream.
