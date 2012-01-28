@@ -6,6 +6,9 @@ and how to read/write from/to it using << and >> operators
 
 Needs GCC's libstdc++ and a POSIX environment
 
+Explanations:
+http://blog.eldruin.com/2011/04/inter-process-communication-pipe-fork-and-c-stl-streams/
+
 Resources:
      YoLinux Tutorial: Fork, Exec and Process control
      Beginning Linux programming, Matthew & Stones, Wrox Press
