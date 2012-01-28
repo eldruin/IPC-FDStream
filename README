@@ -6,6 +6,32 @@ and how to read/write from/to it using << and >> operators
 
 Needs GCC's libstdc++ and a POSIX environment
 
+Usage:
+	$ make
+	$ ./parent
+
+Output:
+	Parent: I'll send the child a message.
+	Parent: Child just said through stdout:
+		"Program: I've received: 'Hello Child!'"
+	Parent: Child just said through stderr:
+		"Program: This is the error stream!"
+
+
+The scenario is: A parent process wants to handle another program’s
+input and output streams, a process-level wrapper.
+
+So the example is: A parent process forks into another child
+process. The parent sends the child a message, the child receives it
+and outputs it to the parent to show the communication works just
+fine.
+
+The forked process calls the program we want to control. Which in this
+case is the easiest C++ program ever: Just reads a line from the
+standard input and outputs a message containing the line just read
+through the standard output. In addition, another message is sent
+through the standard error stream.
+
 Explanations:
 http://blog.eldruin.com/2011/04/inter-process-communication-pipe-fork-and-c-stl-streams/
 
@@ -22,19 +48,3 @@ Please send me any improvement/recommendation/comment through email
 Author: Diego Barrios Romero
 Email: eldruin@eldruin.com
 Public domain Copyleft 2011
-
-
-
-The scenario is: A parent process wants to handle another program’s
-input and output streams, a process-level wrapper.
-
-So the example is: A parent process forks into another child
-process. The parent sends the child a message, the child receives it
-and outputs it to the parent to show the communication works just
-fine.
-
-The forked process calls the program we want to control. Which in this
-case is the easiest C++ program ever: Just reads a line from the
-standard input and outputs a message containing the line just read
-through the standard output. In addition, another message is sent
-through the standard error stream.
