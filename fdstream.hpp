@@ -22,12 +22,12 @@ using namespace std;
 class _fdstream
 {
 protected:
-  _fdstream() :
-      _file_descriptor(-1), _filebuf(NULL)
+  _fdstream()
+    : _file_descriptor(-1), _filebuf(NULL)
   { }
 
-  _fdstream(int file_descriptor, ios_base::openmode openmode) :
-      _file_descriptor(file_descriptor), _openmode(openmode)
+  _fdstream(int file_descriptor, ios_base::openmode openmode)
+    : _file_descriptor(file_descriptor), _openmode(openmode)
   {
     _filebuf = NULL;
     open(file_descriptor, openmode);
@@ -44,7 +44,7 @@ protected:
       // You can also create the filebuf from a FILE* with
       // FILE* f = fdopen(file_descriptor, mode);
       _filebuf = new __gnu_cxx::stdio_filebuf<char> (file_descriptor,
-						     openmode);
+                                                     openmode);
   }
 
   virtual ~_fdstream()
@@ -74,10 +74,10 @@ public:
   void open(int file_descriptor)
   {
     if (!_stream)
-      {
-	_fdstream::open(file_descriptor, ios_base::in);
-	_stream = new istream (_filebuf);
-      }
+    {
+      _fdstream::open(file_descriptor, ios_base::in);
+      _stream = new istream (_filebuf);
+    }
   }
 
   ifdstream& operator>> (string& str)
@@ -95,10 +95,11 @@ public:
   size_t getline (char* s, streamsize n, char delim)
   {
     int i = 0;
-    do{
+    do
+    {
       s[i] = _stream->get();
       i++;
-    }while(i < n-1 && s[i-1] != delim && s[i-1] != '\0');
+    } while(i < n-1 && s[i-1] != delim && s[i-1] != '\0');
 
     s[i-1] = '\0'; // overwrite the delimiter given with string end
 
@@ -117,12 +118,12 @@ private:
 class ofdstream : public _fdstream
 {
 public:
-  ofdstream() :
-      _fdstream(), _stream(NULL)
+  ofdstream()
+    : _fdstream(), _stream(NULL)
   { }
 
-  ofdstream(int file_descriptor) :
-      _fdstream(file_descriptor, ios_base::out)
+  ofdstream(int file_descriptor)
+    : _fdstream(file_descriptor, ios_base::out)
   {
     _stream = new ostream (_filebuf);
   }
@@ -130,17 +131,19 @@ public:
   void open(int file_descriptor)
   {
     if (!_stream)
-      {
-	_fdstream::open(file_descriptor, ios_base::out);
-	_stream = new ostream (_filebuf);
-      }
+    {
+      _fdstream::open(file_descriptor, ios_base::out);
+      _stream = new ostream (_filebuf);
+    }
   }
 
 
   ofdstream& operator<< (const string& str)
   {
     if (_stream->good())
+    {
       (*_stream) << str;
+    }
 
     _stream->flush();
     return *this;
