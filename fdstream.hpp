@@ -12,6 +12,7 @@
 
 #include <iostream>
 #if defined(__GLIBCXX__) || defined(__GLIBCPP__)
+#include <unistd.h>
 #include <ext/stdio_filebuf.h>
 
 #define BUFFER_SIZE (512)
