@@ -106,7 +106,6 @@ public:
 
   ~ifdstream()
   {
-    this->~_fdstream();
     delete _stream;
   }
 
@@ -148,7 +147,6 @@ public:
 
   ~ofdstream()
   {
-    this->~_fdstream();
     delete _stream;
   }
 
