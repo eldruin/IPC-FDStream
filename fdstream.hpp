@@ -17,8 +17,6 @@
 
 #define BUFFER_SIZE (512)
 
-using namespace std;
-
 class _fdstream
 {
 protected:
@@ -26,15 +24,15 @@ protected:
     : _filebuf(NULL), _file_descriptor(-1)
   { }
 
-  _fdstream(int file_descriptor, ios_base::openmode openmode)
+  _fdstream(int file_descriptor, std::ios_base::openmode openmode)
     : _filebuf(NULL), _file_descriptor(file_descriptor), _openmode(openmode)
   {
     open(file_descriptor, openmode);
   }
 
-  ios_base::openmode openmode() const { return _openmode; }
+  std::ios_base::openmode openmode() const { return _openmode; }
 
-  void open(int file_descriptor, ios_base::openmode openmode)
+  void open(int file_descriptor, std::ios_base::openmode openmode)
   {
     if (!_filebuf)
       // We create a C++ stream from a file descriptor
@@ -55,7 +53,7 @@ protected:
   __gnu_cxx::stdio_filebuf<char>* _filebuf;
 private:
   int _file_descriptor;
-  ios_base::openmode _openmode;
+  std::ios_base::openmode _openmode;
 };
 
 class ifdstream : public _fdstream
@@ -66,33 +64,33 @@ public:
   { }
 
   ifdstream(int file_descriptor) :
-      _fdstream(file_descriptor, ios_base::in)
+      _fdstream(file_descriptor, std::ios_base::in)
   {
-    _stream = new istream (_filebuf);
+    _stream = new std::istream (_filebuf);
   }
 
   void open(int file_descriptor)
   {
     if (!_stream)
     {
-      _fdstream::open(file_descriptor, ios_base::in);
-      _stream = new istream (_filebuf);
+      _fdstream::open(file_descriptor, std::ios_base::in);
+      _stream = new std::istream (_filebuf);
     }
   }
 
-  ifdstream& operator>> (string& str)
+  ifdstream& operator>> (std::string& str)
   {
     (*_stream) >> str;
 
     return *this;
   }
 
-  size_t getline (char* s, streamsize n)
+  size_t getline (char* s, std::streamsize n)
   {
     return (getline(s, n, '\n'));
   }
 
-  size_t getline (char* s, streamsize n, char delim)
+  size_t getline (char* s, std::streamsize n, char delim)
   {
     int i = 0;
     do
@@ -101,7 +99,7 @@ public:
       i++;
     } while(i < n-1 && s[i-1] != delim && s[i-1] != '\0');
 
-    s[i-1] = '\0'; // overwrite the delimiter given with string end
+    s[i-1] = '\0'; // overwrite the delimiter given with std::string end
 
     return i-1;
   }
@@ -112,7 +110,7 @@ public:
   }
 
 private:
-  istream* _stream;
+  std::istream* _stream;
 };
 
 class ofdstream : public _fdstream
@@ -123,22 +121,22 @@ public:
   { }
 
   ofdstream(int file_descriptor)
-    : _fdstream(file_descriptor, ios_base::out)
+    : _fdstream(file_descriptor, std::ios_base::out)
   {
-    _stream = new ostream (_filebuf);
+    _stream = new std::ostream (_filebuf);
   }
 
   void open(int file_descriptor)
   {
     if (!_stream)
     {
-      _fdstream::open(file_descriptor, ios_base::out);
-      _stream = new ostream (_filebuf);
+      _fdstream::open(file_descriptor, std::ios_base::out);
+      _stream = new std::ostream (_filebuf);
     }
   }
 
 
-  ofdstream& operator<< (const string& str)
+  ofdstream& operator<< (const std::string& str)
   {
     if (_stream->good())
     {
@@ -155,10 +153,10 @@ public:
   }
 
 private:
-  ostream* _stream;
+  std::ostream* _stream;
 };
 
-size_t getline (ifdstream& ifds, string& str)
+size_t getline (ifdstream& ifds, std::string& str)
 {
   char tmp[BUFFER_SIZE];
   size_t ret = ifds.getline(tmp, BUFFER_SIZE);
