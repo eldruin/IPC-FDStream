@@ -46,7 +46,7 @@ protected:
 						     openmode);
   }
 
-  ~_fdstream()
+  virtual ~_fdstream()
   {
     close(_file_descriptor);
     delete _filebuf;
