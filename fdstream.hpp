@@ -23,13 +23,12 @@ class _fdstream
 {
 protected:
   _fdstream()
-    : _file_descriptor(-1), _filebuf(NULL)
+    : _filebuf(NULL), _file_descriptor(-1)
   { }
 
   _fdstream(int file_descriptor, ios_base::openmode openmode)
-    : _file_descriptor(file_descriptor), _openmode(openmode)
+    : _filebuf(NULL), _file_descriptor(file_descriptor), _openmode(openmode)
   {
-    _filebuf = NULL;
     open(file_descriptor, openmode);
   }
 
@@ -53,8 +52,9 @@ protected:
     delete _filebuf;
   }
 
-  int _file_descriptor;
   __gnu_cxx::stdio_filebuf<char>* _filebuf;
+private:
+  int _file_descriptor;
   ios_base::openmode _openmode;
 };
 
