@@ -32,8 +32,8 @@ standard input and outputs a message containing the line just read
 through the standard output. In addition, another message is sent
 through the standard error stream.
 
-Explanations:
-http://blog.eldruin.com/2011/04/inter-process-communication-pipe-fork-and-c-stl-streams/
+Further explanation:
+https://blog.eldruin.com/inter-process-communication-pipe-fork-cpp-stl-like-streams/
 
 Resources:
      YoLinux Tutorial: Fork, Exec and Process control
@@ -43,8 +43,5 @@ Resources:
      fileno(3) on C++ Streams: A Hacker's Lament, Richard B. Kreckel
 
 
-Please send me any improvement/recommendation/comment through email
-
 Author: Diego Barrios Romero
-Email: eldruin@eldruin.com
 Public domain Copyleft 2011

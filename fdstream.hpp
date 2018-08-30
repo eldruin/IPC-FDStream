@@ -3,10 +3,7 @@
  *
  * Needs GCC's libstdc++ and a POSIX environment
  *
- * Please send me any improvement/recommendation/comment through email
- *
  * Author: Diego Barrios Romero
- * Email: eldruin@eldruin.com
  * Public domain Copyleft 2011
  */
 

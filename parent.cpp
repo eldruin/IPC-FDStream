@@ -13,11 +13,7 @@
  *      The GNU C++ Library manual
  *      fileno(3) on C++ Streams: A Hacker's Lament, Richard B. Kreckel
  *
- *
- * Please send me any improvement/recommendation/comment through email
- *
  * Author: Diego Barrios Romero
- * Email: eldruin@eldruin.com
  * Public domain Copyleft 2011
  */
 
